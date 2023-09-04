@@ -105,71 +105,7 @@ rule rseqc_geneCoverage:
         "results/00log/rseqc/rseqc_geneCoverage/{sample}.log"
     shell:
         "geneBody_coverage.py -r {input.bed} -i {input.bam}  -o {params.prefix} 2> {log}"
-
-
-## Complexity Curve
-# This rule uses the Preseq package () to compute and plot an observed/expected genomic library complexity curve
-# Can be used to assess the sequencing depth of an experiment and to evaluate further depth
-# Takes in a BAM file with duplicates
-rule library_complexity:
-    input:
-        "results/02alignments/{sample}/{sample}_marked.bam"
-    output:
-        c_curve    = "results/01qc/preseq/curve/{sample}_c_curve.txt",
-        lc_extrap  = "results/01qc/preseq/extrap/{sample}_lc_extrap.txt",
-    message:
-        "creating creating complexity tables for current and future genomic libraries"
-    params:
-        curve      = config["params"]["curve"],
-        extrap     = config["params"]["extrap"]
-    log:
-        c_curve    = "results/00log/preseq/{sample}_c_curve.log",
-        lc_extrap  = "results/00log/preseq/{sample}_lc_extrap.log",
-    shell:
-        """
-       preseq c_curve {params.curve} \
-       -o {output.c_curve} {input} 2> {log.c_curve}
-       preseq lc_extrap {params.extrap} \
-       -o {output.lc_extrap} {input} 2> {log.lc_extrap}
-        """
-
-rule plot_lib_complex:
-    input:
-       c_curve   = expand("results/01qc/preseq/curve/{sample}_c_curve.txt", sample = SAMPLES),
-       lc_extrap = expand("results/01qc/preseq/extrap/{sample}_lc_extrap.txt", sample = SAMPLES)
-    output:
-        c_curve_plot    = "results/01qc/preseq/curve/c_curve.pdf",
-        lc_extrap_plot  = "results/01qc/preseq/extrap/lc_extrap.pdf",
-        obs_exp_plot    = "results/01qc/preseq/obs_exp_plot.pdf"
-    params:
-        sample_names = expand("{sample}", sample = SAMPLES)
-    log:
-        "results/00log/preseq/plot_complexity_curve.log"
-    script:
-        "../scripts/plot_library_complexity.R"
-
-
-## Duplication Plot
-# This rule uses and R package to plot and assess duplication problems. Read duplication has a strong
-# biological source that's more than the usual technical PCR duplication. Gives insights into the duplication problem
-# by relating gene expression level and duplication rate present on it.
-rule dupRadar:
-    input:
-        marked_bam = "results/02alignments/{sample}/{sample}_marked.bam"
-    output:
-        plot = "results/01qc/dupradar/{sample}.pdf"
-    params:
-        # GTF to counts the read falling on a feature, use a different GTF cause gencode one seems to give a less clear plot
-        gtf = config["ref"]["annot_refseq"],
-        strand = 1,
-        #'0' (unstranded), '1' (stranded) and '2' (reversely stranded)
-        threads = 8
-    log:
-        "results/00log/dupradar/{sample}.log"
-    script:
-        "../scripts/dupRadar.R"
-
-    
+   
 
 # ---------------- MultiQC report ----------------- #
 rule multiQC_inputs:
@@ -181,8 +117,7 @@ rule multiQC_inputs:
         expand("results/01qc/rseqc/{sample}.inner_distance_freq.inner_distance_freq.txt", sample = SAMPLES),
         expand("results/01qc/rseqc/{sample}.read_distribution.txt", sample = SAMPLES),
         expand("results/00log/alignments/rm_dup/{sample}.log", sample = SAMPLES),
-        expand("results/01qc/rseqc/{sample}.geneBodyCoverage.geneBodyCoverage.txt", sample = SAMPLES),
-        expand("results/01qc/dupradar/{sample}.pdf", sample = SAMPLES)
+        expand("results/01qc/rseqc/{sample}.geneBodyCoverage.geneBodyCoverage.txt", sample = SAMPLES)
     output: 
         file = "results/01qc/multiqc/multiqc_inputs.txt"
     message:
