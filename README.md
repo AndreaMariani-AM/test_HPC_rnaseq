@@ -49,4 +49,4 @@ Singularity image is in `singularity` folder
 Other resources like Index/annotation in `resources` folder  
 
 
-Note that this repo is synched with this [github repo](https://github.com/AndreaMariani-AM/test_HPC_rnaseq), although not some files (data, some resources and ...) ain't synched given the size.
+Note that this repo is synched with this [github repo](https://github.com/AndreaMariani-AM/test_HPC_rnaseq), although some files (data, some resources and ...) ain't synched given the size.
