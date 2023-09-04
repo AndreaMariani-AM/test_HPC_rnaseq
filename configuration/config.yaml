@@ -37,13 +37,13 @@ ref:
   genome: "mouse"
   ##### SALMON
   # transriptome Indexed with `salmon index` function
-  salmon_index: /hpcnfs/data/DP/Databases/Salmon_index/mm10/salmon_index
+  salmon_index: /hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/resources/salmon_index
   # gtf file with transcripts
-  annotation: /hpcnfs/data/DP/GENCODE_GENOMES/GRCm38/M21/gencode.vM21.annotation.gtf
+  annotation: /hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/resources/annotation/gencode.vM21.annotation.gtf
   # fasta of transcripts
-  transcriptome:  /hpcnfs/data/DP/GENCODE_GENOMES/GRCm38/M21/gencode.vM21.transcripts.fa.gz
+  transcriptome:  /hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/resources/annotation/gencode.vM21.transcripts.fa.gz
   # assembly of genome
-  assembly: /hpcnfs/data/DP/GENCODE_GENOMES/GRCm38/M21/GRCm38.primary_assembly.genome.fa.gz
+  assembly: /hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/resources/annotation/GRCm38.primary_assembly.genome.fa.gz
   # Name of the annotation (ensembl, symbol, entrez...) it will be the column name of the genes
   # It will also be the column used for the conversion of gene-to-entrez for clusterProfiler.
   # The name has to be compatible with org.Mm.eg.db or org.Hg.eg.db
