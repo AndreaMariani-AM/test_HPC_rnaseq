@@ -1,16 +1,13 @@
 # path (from the repository root) to sample sheet (TSV format, columns: sample, condition, ...)
 samples: configuration/samples.tsv
 
-
 # path (from the repository root) to sequencing unit sheet (TSV format, columns: sample, unit, fq1, fq2)
 # Units are technical replicates (e.g. lanes, or resequencing of the same biological
 # sample).
 units: configuration/units.tsv
 
-
 # path (from the repository root) to cluster configuration. Parameters for submitting jobs to cluster via qsub
 cluster: configuration/cluster.yaml
-
 
 # Prefix to temporary
 # Some files -such as fastq- occupy a lot of space. To avoid space problems during the processing of the pipelines
@@ -19,7 +16,6 @@ cluster: configuration/cluster.yaml
 # By now just fastq files will be located in this folder
 # IMPORTANT: if you have running multiple snakemake pipelines with the same tmp folder all the fastq files will be located togeter. Care with the sample names to not be repeated.
 tmp: /hpcnfs/scratch/temporary/.snakemake_HPC_test
-
 
 # perform trimming: false or true
 # if true go to params (at the end)
@@ -35,12 +31,10 @@ lfcShrink: TRUE
 # Set seed for downsampling
 seed: 1234
 
-
 # Ref
 ref:
   # Select the genome of the organism, needed to perform GO analyses. Supported: mouse, human.
   genome: "mouse"
- 
   ##### SALMON
   # transriptome Indexed with `salmon index` function
   salmon_index: /hpcnfs/data/DP/Databases/Salmon_index/mm10/salmon_index
@@ -53,13 +47,13 @@ ref:
   # Name of the annotation (ensembl, symbol, entrez...) it will be the column name of the genes
   # It will also be the column used for the conversion of gene-to-entrez for clusterProfiler.
   # The name has to be compatible with org.Mm.eg.db or org.Hg.eg.db
-  annot_type: "ENSEM
+  annot_type: "ENSEMBL"
   # This will be used to add different annotations to the DEGs table.
   # i.e: ensembl, entrez, ucsc... 
   geneInfo: 
     # path to geneInfo.tab file from STAR
     # leave it blank if there's no file or you don' want to perform this
-    file: /hpcnfs/data/DP/STAR_INDEXES/v2.7.5a/GRCm38/geneInfo.tab
+    #file: /hpcnfs/data/DP/STAR_INDEXES/v2.7.5a/GRCm38/geneInfo.tab
     # Define the position of the column used for the annotation and the column to add.
     # So, if we used geneSymbol as annotation (2nd column) and we want ENSEMBL (first)
     # Write 2 in used and 1 in toAdd
@@ -97,23 +91,14 @@ diffexp:
     - 2.5
   # contrasts for the deseq2 results method
   contrasts:
-    WT_00h-vs-WT_96h:
-      - WT_00h
-      - WT_96h
-    WT_48h-vs-WT_00h:
-      - WT_48h
-      - WT_00h
-    WT_96h-vs-WT_48h:
-      - WT_96h
-      - WT_48h
-    WT_96h-vs-WT_00h:
-      - WT_96h
-      - WT_00h
+    I53S_OHT-vs-WT_OHT:
+      - I53S_OHT
+      - WT_OHT
 
       
 enrichments:
   # Perform or not enrichment analysis. True or False.
-  do: True
+  do: False
   # Use background genes as universe in enrichment analyses. This SHOULD be
   # always used as it will give the most correct p-values. However, to be able to
   # still reproduce the results of the previous version of the pipeline we'll keep
