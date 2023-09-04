@@ -88,23 +88,6 @@ rule rseqc_readdis:
         "results/00log/rseqc/rseqc_readdis/{sample}.log"
     shell:
         "read_distribution.py -r {input.bed} -i {input.bam} > {output} 2> {log}"
-
-rule rseqc_geneCoverage:
-    input:
-        bam   = "results/02alignments/{sample}/{sample}.bam",
-        index = "results/02alignments/{sample}/{sample}.bam.bai",
-        bed   = "results/01qc/rseqc/annotation.bed"
-    output:
-        "results/01qc/rseqc/{sample}.geneBodyCoverage.geneBodyCoverage.txt"
-    params:
-        prefix="results/01qc/rseqc/{sample}.geneBodyCoverage"
-    priority: 1
-    shadow:
-        "minimal"
-    log:
-        "results/00log/rseqc/rseqc_geneCoverage/{sample}.log"
-    shell:
-        "geneBody_coverage.py -r {input.bed} -i {input.bam}  -o {params.prefix} 2> {log}"
    
 
 # ---------------- MultiQC report ----------------- #
@@ -116,8 +99,7 @@ rule multiQC_inputs:
         expand("results/01qc/rseqc/{sample}.stats.txt", sample = SAMPLES),
         expand("results/01qc/rseqc/{sample}.inner_distance_freq.inner_distance_freq.txt", sample = SAMPLES),
         expand("results/01qc/rseqc/{sample}.read_distribution.txt", sample = SAMPLES),
-        expand("results/00log/alignments/rm_dup/{sample}.log", sample = SAMPLES),
-        expand("results/01qc/rseqc/{sample}.geneBodyCoverage.geneBodyCoverage.txt", sample = SAMPLES)
+        expand("results/00log/alignments/rm_dup/{sample}.log", sample = SAMPLES)
     output: 
         file = "results/01qc/multiqc/multiqc_inputs.txt"
     message:
