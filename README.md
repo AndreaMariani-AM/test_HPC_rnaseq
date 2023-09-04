@@ -33,7 +33,7 @@ and RUN the pipeline by running the script execute_pipeline.sh
 
 ############################
 
-Data is in `data` folder, and is from this [paper](https://www.sciencedirect.com/science/article/pii/S1097276519308901?via%3Dihub#app2). It can be downloaded if necessary, although is already provided.
+Data is in `data` folder, and it's from this [paper](https://www.sciencedirect.com/science/article/pii/S1097276519308901?via%3Dihub#app2). It can be downloaded if necessary, although is already provided.
 
 ```
 curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR966/001/SRR9661891/SRR9661891_1.fastq.gz -o SRR9661891_GSM3934865_I53S-OHT-rep2_Mus_musculus_RNA-Seq_1.fastq.gz
