@@ -17,3 +17,11 @@ results/*
 *.o
 *.so
 *.bak
+
+# Other folder that contains large data
+resources/salmon_index/*
+resources/annotation
+data/*
+singularity/*
+
+
