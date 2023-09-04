@@ -6,7 +6,7 @@ from snakemake.utils import validate, min_version
 min_version("5.9.1")
 
 ##### Singularity image path #####
-singularity: "/hpcnfs/data/DP/Singularity/rnaseq_snakemake_220923.sif"
+singularity: "/hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/singularity/rnaseq_snakemake_220923.sif"
 
 
 #-----------------------------------------------------------------------------------------------------------------------
