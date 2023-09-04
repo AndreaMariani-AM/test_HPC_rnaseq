@@ -91,9 +91,9 @@ diffexp:
     - 2.5
   # contrasts for the deseq2 results method
   contrasts:
-    I53S_OHT-vs-WT_OHT:
-      - I53S_OHT
-      - WT_OHT
+    I53ST-vs-WT:
+      - I53S
+      - WT
 
       
 enrichments:
