@@ -31,10 +31,11 @@ lfcShrink: TRUE
 # Set seed for downsampling
 seed: 1234
 
-# Ref
 ref:
   # Select the genome of the organism, needed to perform GO analyses. Supported: mouse, human.
   genome: "mouse"
+  # the STAR index
+  index: /hpcnfs/data/DP/STAR_INDEXES/v2.7.5a/GRCm38
   ##### SALMON
   # transriptome Indexed with `salmon index` function
   salmon_index: /hpcscratch/ieo/benchmarks/ieo5776_rnaseq/RNAseq_snakemake/resources/salmon_index
